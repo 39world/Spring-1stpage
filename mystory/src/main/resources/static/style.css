@@ -5,6 +5,7 @@
 
 .modal-content{
     width:30%;
+    min-width : 300px;
 }
 .jumbotron {
     background-image: url("images/cloud.jpg") ;
