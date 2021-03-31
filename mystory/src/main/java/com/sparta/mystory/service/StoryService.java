@@ -1,9 +1,9 @@
 package com.sparta.mystory.service;
 
 
-import com.sparta.mystory.models.Story;
-import com.sparta.mystory.models.StoryRepository;
-import com.sparta.mystory.models.StoryRequestDto;
+import com.sparta.mystory.model.Story;
+import com.sparta.mystory.repository.StoryRepository;
+import com.sparta.mystory.dto.StoryRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

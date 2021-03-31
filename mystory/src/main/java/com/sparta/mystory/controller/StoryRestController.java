@@ -1,27 +1,29 @@
 package com.sparta.mystory.controller;
 
-
-import com.sparta.mystory.models.Story;
-import com.sparta.mystory.models.StoryRepository;
-import com.sparta.mystory.models.StoryRequestDto;
+import com.sparta.mystory.model.Story;
+import com.sparta.mystory.repository.StoryRepository;
+import com.sparta.mystory.dto.StoryRequestDto;
+import com.sparta.mystory.security.UserDetailsImpl;
 import com.sparta.mystory.service.StoryService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
 public class StoryRestController {
 
-
-
     private final StoryRepository storyRepository;
     private final StoryService storyService;
 
     @PostMapping("/api/stories")
-    public Story createStory(@RequestBody StoryRequestDto storyRequestDto){
-        Story story = new Story(storyRequestDto);
+    public Story createStory(@RequestBody StoryRequestDto storyRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
+        Long userId = userDetails.getUser().getId();
+        Story story = new Story(storyRequestDto, userId);
+
         return storyRepository.save(story);
     }
 
@@ -42,7 +44,6 @@ public class StoryRestController {
         return id;
     }
 
-
     @GetMapping("/api/pop/{id}")
     public Story createStory(@PathVariable Long id){
         Story story = storyRepository.findById(id).orElseThrow(
@@ -51,7 +52,9 @@ public class StoryRestController {
         return story;
     }
 
-
-
-
+    @GetMapping("/api/writerstory")
+    public List<Story> getStory(@AuthenticationPrincipal UserDetailsImpl userDetails){
+        Long userId = userDetails.getUser().getId();
+        return storyRepository.findAllByuserId(userId);
+    }
 }

@@ -1,5 +1,7 @@
-package com.sparta.mystory.models;
+package com.sparta.mystory.model;
 
+import com.sparta.mystory.dto.CommentRequestDto;
+import com.sparta.mystory.dto.StoryRequestDto;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -18,4 +20,5 @@ public abstract class Timestamped {
 
     @LastModifiedDate // 마지막 변경 시점
     private LocalDateTime modifiedAt;
+
 }

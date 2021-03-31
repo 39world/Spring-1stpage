@@ -1,4 +1,4 @@
-package com.sparta.mystory.models;
+package com.sparta.mystory.dto;
 
 
 import lombok.Getter;
